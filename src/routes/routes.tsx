@@ -5,7 +5,7 @@ import SidebarDash from "../components/pages/SidebarDash";
 import Proyects from "../components/pages/Proyects";
 import Access from "../components/pages/Access";
 import Configuracion from "../components/pages/Configuracion";
-import ProtectRoute from "../hooks/protectRoute";
+import ProtectRoute from "../hooks/ProtectRoute";
 
 // 1. Cambiamos el nombre a "AppRoutes" (los componentes siempre van en mayúscula)
 export default function AppRoutes() {
