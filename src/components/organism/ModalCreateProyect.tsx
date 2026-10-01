@@ -75,7 +75,7 @@ export default function ModalCreateProyect({ onClose, onCreated }: ModalCreatePr
         </button>
 
         <h2 id="create-project-title" className="pr-12 text-2xl font-semibold text-white">
-          Crear proyecto
+          Crear proyectos
         </h2>
         <p className="mt-1 text-sm text-gray-200">
           Define los datos iniciales del proyecto.
