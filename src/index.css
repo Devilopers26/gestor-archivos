@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand-black: #0a0a0a;
+  --color-brand-pink: #c42caa;
+  --color-brand-purple: #7b2cd9;
+  --color-brand-white: #ffffff;
+}
+
+@theme {
+  --color-brand-black: var(--color-brand-black);
+  --color-brand-pink: var(--color-brand-pink);
+  --color-brand-purple: var(--color-brand-purple);
+  --color-brand-white: var(--color-brand-white);
+}
+
+@keyframes toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
