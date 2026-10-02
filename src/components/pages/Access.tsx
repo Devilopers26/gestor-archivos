@@ -214,7 +214,7 @@ export default function Access() {
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-[#faf9fc] p-5 md:p-8">
+    <div className="flex-1 overflow-auto  p-5 md:p-8">
       
       <div className="mx-auto w-full max-w-7xl">
         {/* Mensajes de notificación */}

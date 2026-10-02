@@ -105,7 +105,7 @@ export default function Proyects() {
   }
 
   return (
-<div className="flex-1 overflow-auto bg-[#faf9fc] p-5 md:p-8">
+<div className="flex-1 overflow-auto p-5 md:p-8">
   <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
     <div>
       <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[#9a55bf]">Espacio de trabajo</p>
