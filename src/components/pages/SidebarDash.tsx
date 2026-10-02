@@ -79,7 +79,7 @@ export default function SidebarDash() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 h-screen flex flex-col overflow-hidden bg-[#0A0A0A] ml-2">
+      <main className="flex-1 h-screen flex flex-col overflow-hidden bg-white ">
 
         <HaderDash />
         <div className=" border border-amber-50"></div>

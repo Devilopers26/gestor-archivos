@@ -30,11 +30,11 @@ export default function Home() {
 
   function statusBadge(status: string) {
     const styles: Record<string, string> = {
-      en_progreso: "bg-yellow-500/15 text-yellow-400 border border-yellow-500/30",
-      completado: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30",
-      pausado: "bg-white/10 text-white/50 border border-white/15",
+      en_progreso: "bg-yellow-50 text-yellow-700 border border-yellow-200",
+      completado: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+      pausado: "bg-gray-100 text-gray-600 border border-gray-200",
     };
-    return styles[status] || "bg-white/10 text-white/50 border border-white/15";
+    return styles[status] || "bg-gray-100 text-gray-600 border border-gray-200";
   }
 
   const stats = [
@@ -42,43 +42,40 @@ export default function Home() {
       title: "Proyectos Recientes",
       count: String(totalProyectos),
       icon: Folder,
-      gradient: "from-[#7B2CD9]/20 to-[#7B2CD9]/5",
-      iconBg: "bg-[#7B2CD9]/20 border border-[#7B2CD9]/30",
-      iconColor: "text-[#c084fc]",
+      iconBg: "bg-purple-50 border border-purple-100",
+      iconColor: "text-purple-600",
     },
     {
       title: "Archivos Recientes",
       count: String(totalArchivos),
       icon: File,
-      gradient: "from-[#c42caa]/20 to-[#c42caa]/5",
-      iconBg: "bg-[#c42caa]/20 border border-[#c42caa]/30",
-      iconColor: "text-pink-300",
+      iconBg: "bg-pink-50 border border-pink-100",
+      iconColor: "text-pink-600",
     },
     {
       title: "Tu Rol",
       count: user?.role || "-",
       icon: User,
-      gradient: "from-white/5 to-white/2",
-      iconBg: "bg-white/10 border border-white/15",
-      iconColor: "text-white/60",
+      iconBg: "bg-gray-50 border border-gray-200",
+      iconColor: "text-gray-600",
     },
   ];
 
   return (
-    <div className="flex-1 overflow-auto bg-[#070807] p-10 flex flex-col items-center w-full">
-      <div className="w-full max-w-350">
+    <div className="flex-1 overflow-auto p-10 md:p-10 flex flex-col items-center w-full">
+      <div className="w-full ">
 
         {/* Header */}
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-linear-to-br from-[#7B2CD9] to-[#c42caa] shadow-lg">
-              <TrendingUp size={20} className="text-white" />
+          <div className="flex items-center gap-4 mb-2">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-linear-to-br from-[#7B2CD9] to-[#c42caa] shadow-md shadow-purple-500/20">
+              <TrendingUp size={24} className="text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-semibold text-white">
+              <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
                 ¡Hola, {user?.name || "de nuevo"}!
               </h1>
-              <p className="text-sm text-white/40">
+              <p className="text-sm text-gray-500 mt-1 font-medium">
                 Aquí tienes un resumen de tus proyectos y actividad reciente.
               </p>
             </div>
@@ -86,18 +83,18 @@ export default function Home() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
           {stats.map((stat, i) => (
             <div
               key={i}
-              className={`bg-linear-to-br ${stat.gradient} border border-white/10 rounded-2xl p-5 flex items-center gap-4 hover:border-white/20 transition-colors`}
+              className="bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-5 shadow-sm hover:shadow-md hover:border-purple-200 transition-all duration-300"
             >
-              <div className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${stat.iconBg}`}>
-                <stat.icon size={20} className={stat.iconColor} />
+              <div className={`flex size-14 shrink-0 items-center justify-center rounded-xl ${stat.iconBg}`}>
+                <stat.icon size={24} className={stat.iconColor} />
               </div>
               <div className="min-w-0">
-                <p className="text-xs text-white/40 mb-0.5">{stat.title}</p>
-                <p className="text-xl font-semibold text-white truncate">{stat.count}</p>
+                <p className="text-sm font-medium text-gray-500 mb-1">{stat.title}</p>
+                <p className="text-2xl font-bold text-gray-900 truncate">{stat.count}</p>
               </div>
             </div>
           ))}
@@ -105,61 +102,68 @@ export default function Home() {
 
         {/* Projects Section */}
         <div>
-          <div className="flex items-center gap-2 mb-6">
-            <Clock size={18} className="text-white/40" />
-            <h2 className="text-lg font-medium text-white">Proyectos Recientes</h2>
+          <div className="flex items-center gap-2.5 mb-6">
+            <Clock size={20} className="text-gray-400" />
+            <h2 className="text-xl font-bold text-gray-900">Proyectos Recientes</h2>
           </div>
 
           {loading ? (
+            // Skeleton Loading Claro
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="rounded-2xl border border-white/10 bg-white/3 p-6 animate-pulse">
-                  <div className="h-12 w-12 rounded-xl bg-white/10 mb-4" />
-                  <div className="h-4 bg-white/10 rounded mb-2 w-3/4" />
-                  <div className="h-3 bg-white/5 rounded w-full" />
+                <div key={i} className="rounded-2xl border border-gray-100 bg-gray-50 p-6 animate-pulse">
+                  <div className="flex justify-between items-start mb-5">
+                    <div className="h-12 w-12 rounded-xl bg-gray-200" />
+                    <div className="h-6 w-20 bg-gray-200 rounded-full" />
+                  </div>
+                  <div className="h-5 bg-gray-200 rounded mb-3 w-3/4" />
+                  <div className="h-4 bg-gray-200 rounded mb-6 w-full" />
+                  <div className="h-4 bg-gray-200 rounded w-1/2 pt-4 border-t border-gray-200" />
                 </div>
               ))}
             </div>
           ) : proyectos.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/15 py-20 text-center">
-              <div className="flex size-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 mb-4">
-                <Folder size={28} className="text-white/30" />
+            // Empty State Claro
+            <div className="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-gray-200 bg-gray-50 py-24 text-center">
+              <div className="flex size-16 items-center justify-center rounded-2xl bg-white shadow-sm border border-gray-100 mb-5">
+                <Folder size={28} className="text-gray-400" />
               </div>
-              <p className="text-white/50 text-base font-medium">No tienes proyectos aún.</p>
-              <p className="text-white/30 text-sm mt-1">Crea uno nuevo desde la sección Proyectos.</p>
+              <p className="text-gray-900 text-lg font-semibold">No tienes proyectos aún.</p>
+              <p className="text-gray-500 text-sm mt-1.5">Crea uno nuevo desde la sección Proyectos.</p>
             </div>
           ) : (
+            // Cards de Proyectos Claros
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {proyectos.map((pu) => (
                 <div
                   key={pu.id}
-                  className="bg-linear-to-br from-[#111111] via-[#17121f] to-[#7B2CD9]/20 border border-white/10 rounded-2xl p-6 hover:border-white/25 transition-colors group"
+                  className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-purple-300 hover:-translate-y-1 transition-all duration-300 group flex flex-col"
                 >
                   {/* Card Header */}
                   <div className="flex justify-between items-start mb-5">
-                    <div className="flex size-12 items-center justify-center rounded-xl bg-linear-to-br from-[#7B2CD9] to-[#c42caa] shadow-md text-white">
+                    <div className="flex size-12 items-center justify-center rounded-xl bg-linear-to-br from-[#7B2CD9] to-[#c42caa] shadow-md shadow-purple-500/20 text-white group-hover:scale-105 transition-transform">
                       <Folder size={22} />
                     </div>
-                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${statusBadge(pu.status)}`}>
+                    <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${statusBadge(pu.status)}`}>
                       {pu.status.replace("_", " ")}
                     </span>
                   </div>
 
                   {/* Card Body */}
-                  <h3 className="font-semibold text-white mb-1.5 text-base uppercase tracking-wide truncate">
+                  <h3 className="font-bold text-gray-900 mb-2 text-lg truncate">
                     {pu.name}
                   </h3>
-                  <p className="text-white/40 mb-5 line-clamp-2 text-sm leading-relaxed">
-                    {pu.descripcion || "Sin descripción"}
+                  <p className="text-gray-500 mb-6 line-clamp-2 text-sm leading-relaxed grow">
+                    {pu.descripcion || "Sin descripción proporcionada para este proyecto."}
                   </p>
 
                   {/* Card Footer */}
-                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                    <span className="flex items-center gap-1.5 text-sm text-white/50">
-                      <FileText size={15} className="text-pink-400" />
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span className="flex items-center gap-1.5 text-sm font-medium text-gray-600">
+                      <FileText size={16} className="text-pink-500" />
                       {pu.proyect_archivos_nr || "0"} archivos
                     </span>
-                    <span className="bg-[#7B2CD9]/20 border border-[#7B2CD9]/30 px-2.5 py-0.5 rounded-full text-xs font-medium text-[#c084fc]">
+                    <span className="bg-purple-50 border border-purple-100 px-3 py-1 rounded-full text-xs font-bold text-purple-700">
                       {pu.rol_en_proyecto}
                     </span>
                   </div>

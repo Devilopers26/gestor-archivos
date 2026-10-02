@@ -9,6 +9,12 @@ import ModalProyects from "../organism/ModalProyectsArchivos";
 import ModalCreateProyect from "../organism/ModalCreateProyect";
 import ModalEditarProyecto from "../organism/ModalEditarProyecto";
 
+const statusStyles: Record<string, string> = {
+  en_progreso: "border-amber-200 bg-amber-50 text-amber-800",
+  completado: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  pausado: "border-slate-200 bg-slate-100 text-slate-600",
+};
+
 export default function Proyects() {
   const { accessToken, user} = useAuth();
   const [proyectos, setProyectos] = useState<ProyectoUsuario[]>([]);
@@ -99,22 +105,29 @@ export default function Proyects() {
   }
 
   return (
-<div className="flex-1 overflow-auto bg-[#070807] p-6 md:p-8">
-
-  {/* Header */}
-  <div className="mb-6 flex items-center justify-between">
+<div className="flex-1 overflow-auto bg-[#faf9fc] p-5 md:p-8">
+  <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
     <div>
-      <h1 className="text-3xl font-medium text-white">Mis proyectos</h1>
-      <p className="mt-1 text-sm text-white/40">
-        Gestiona y revisa tus proyectos
-      </p>
+      <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[#9a55bf]">Espacio de trabajo</p>
+      <h1 className="text-3xl font-bold text-gray-900">Mis proyectos</h1>
+      <p className="mt-1 text-sm text-gray-500">Gestiona y revisa tus proyectos</p>
     </div>
 
-    {user?.role === "admin" && (
-      <button onClick={() => setOpenModalProyect(true)} className="flex size-11 items-center justify-center rounded-xl bg-[#ff2fa3] text-white transition hover:bg-[#d633b5]">
-        <Plus size={20} />
-      </button>
-    )}
+    <div className="flex items-center gap-3">
+      <span className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-600">
+        {proyectos.length} {proyectos.length === 1 ? "proyecto" : "proyectos"}
+      </span>
+      {user?.role === "admin" && (
+        <button
+          type="button"
+          onClick={() => setOpenModalProyect(true)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#7b2cd9] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#6922bd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7b2cd9] focus-visible:ring-offset-2"
+        >
+          <Plus size={18} aria-hidden="true" />
+          Crear proyecto
+        </button>
+      )}
+    </div>
   </div>
    <Busqueda
     busqueda={busqueda}
@@ -133,97 +146,71 @@ export default function Proyects() {
     setActionError={setActionError} 
   />
   {loading ? (
-    <p className="text-white/40">Cargando proyectos...</p>
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" aria-label="Cargando proyectos">
+      {[1, 2, 3].map((item) => (
+        <div key={item} className="h-56 animate-pulse rounded-xl border border-gray-200 bg-white p-6">
+          <div className="mb-6 size-11 rounded-xl bg-gray-100" />
+          <div className="mb-3 h-4 w-2/3 rounded bg-gray-100" />
+          <div className="h-3 w-full rounded bg-gray-100" />
+          <div className="mt-2 h-3 w-4/5 rounded bg-gray-100" />
+        </div>
+      ))}
+    </div>
   ) : error ? (
-    <p className="text-red-400">{error}</p>
+    <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</p>
   ) : proyectos.length === 0 ? (
-    <div className="rounded-2xl bg-[#20201f] p-10 text-center text-white/40">
-      No tienes proyectos todavía.
+    <div className="flex flex-col items-center rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-16 text-center">
+      <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-purple-50 text-[#7b2cd9]">
+        <Folder size={26} aria-hidden="true" />
+      </div>
+      <h2 className="text-lg font-semibold text-gray-900">Aún no tienes proyectos</h2>
+      <p className="mt-1 max-w-sm text-sm text-gray-500">Aquí aparecerán los proyectos a los que tienes acceso.</p>
     </div>
   ) : proyectosFiltrados.length === 0 ? (
-    <div className="rounded-2xl bg-[#20201f] p-10 text-center text-white/40">
+    <div className="rounded-xl border border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-500">
       No hay proyectos que coincidan con los filtros.
     </div>
   ) : (
-    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-      {proyectosFiltrados.map((proyectoUsuario, index) => {
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {proyectosFiltrados.map((proyectoUsuario) => {
         return (
         <article
           key={proyectoUsuario.id}
-          className=" bg-linear-to-br
-                    from-[#111111]
-                    via-[#17121f]
-                    to-[#7B2CD9]/25
-
-                    border-2 border-white
-                    rounded-2xl
-
-                    transition-all duration-300
-
-                    hover:to-[#7B2CD9]/45
-                    hover:border-[#7B2CD9]/40
-                    hover:shadow-lg  p-6"
-          onClick={() => {
-            setSelectProyect(proyectoUsuario);
-            setOpenModalProyectArchivo(true);
-          }}
+          className="group flex min-h-64 flex-col rounded-xl border border-gray-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-lg"
         >
-          <div className="mb-8 flex items-start justify-between ">
-
-            <div
-              className=
-                "flex size-11 items-center justify-center rounded-xl text-white"
-            >
-              <Folder size={20} />
+          <button
+            type="button"
+            className="flex grow flex-col p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#7b2cd9]"
+            onClick={() => {
+              setSelectProyect(proyectoUsuario);
+              setOpenModalProyectArchivo(true);
+            }}
+          >
+            <div className="mb-5 flex w-full items-start justify-between">
+              <div className="flex size-11 items-center justify-center rounded-xl bg-linear-to-br from-[#7b2cd9] to-[#c42caa] text-white shadow-sm shadow-purple-200 transition-transform group-hover:scale-105">
+                <Folder size={20} aria-hidden="true" />
+              </div>
+              <ArrowUpRight size={18} className="text-gray-300 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#7b2cd9]" aria-hidden="true" />
             </div>
 
-            <button
-              className={`
-                flex size-10 items-center justify-center rounded-xl border
-                ${
-                  index === 0
-                    ? "border-white/30 text-white"
-                    : "border-white/10 text-white/60"
-                }
-              `}
-            >
-              <ArrowUpRight size={18} />
-            </button>
-          </div>
+            <span className={`mb-3 w-fit rounded-full border px-2.5 py-1 text-xs font-semibold ${statusStyles[proyectoUsuario.proyecto.status] ?? "border-gray-200 bg-gray-100 text-gray-600"}`}>
+              {proyectoUsuario.proyecto.status.replaceAll("_", " ")}
+            </span>
+            <h2 className="truncate text-lg font-semibold text-gray-900">
+              {proyectoUsuario.proyecto.name}
+            </h2>
+            <p className="mt-2 line-clamp-2 grow text-sm leading-6 text-gray-500">
+              {proyectoUsuario.proyecto.descripcion || "Sin descripción"}
+            </p>
 
-          <span
-            className={`text-xs ${
-              index === 0 ? "text-white/70" : "text-white/40"
-            }`}
-          >
-            {proyectoUsuario.proyecto.status.replaceAll("_", " ")}
-          </span>
-
-          <h2 className="mt-2 text-xl font-medium text-white">
-            {proyectoUsuario.proyecto.name}
-          </h2>
-
-          <p
-            className={`mt-2 line-clamp-2 text-sm leading-6 ${
-              index === 0 ? "text-white/75" : "text-white/45"
-            }`}
-          >
-            {proyectoUsuario.proyecto.descripcion || "Sin descripción"}
-          </p>
-
-          <div
-            className={`mt-8 flex items-center justify-between border-t pt-4 text-xs ${
-              index === 0
-                ? "border-white/20 text-white/70"
-                : "border-white/6 text-white/40"
-            }`}
-          >
-            <span>{proyectoUsuario.proyecto.archivos.length} archivos</span>
-            <span className="capitalize">{proyectoUsuario.rol_en_proyecto}</span>
-          </div>
+            <div className="mt-5 flex w-full items-center justify-between border-t border-gray-100 pt-4 text-xs text-gray-500">
+              <span className="font-medium">{proyectoUsuario.proyecto.archivos.length} archivos</span>
+              <span className="rounded-md bg-gray-50 px-2 py-1 font-medium capitalize text-gray-600">{proyectoUsuario.rol_en_proyecto}</span>
+            </div>
+          </button>
           {
             proyectoUsuario.rol_en_proyecto == "admin_proyect" && user?.role == "admin" && 
-            <div className="mt-5 flex gap-2">
+            <div className="flex gap-2 px-5 pb-5">
               <button
                 type="button"
                 aria-label="Editar proyecto"
@@ -231,7 +218,7 @@ export default function Proyects() {
                   event.stopPropagation();
                   setProyectoEnEdicion(proyectoUsuario.proyecto);
                 }}
-                className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-white px-3.5 text-sm font-medium text-[#171117] transition hover:bg-fuchsia-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#ff2fa3]"
+                className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-purple-200 bg-purple-50 px-3 text-sm font-medium text-purple-800 transition hover:bg-purple-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
               >
                 <Pencil size={15} aria-hidden="true" />
                 Editar
@@ -245,7 +232,7 @@ export default function Proyects() {
                   setActionError(null);
                   setProyectoAEliminar(proyectoUsuario);
                 }}
-                className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-3.5 text-sm font-medium text-white transition hover:border-red-500 hover:bg-red-500/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#ff2fa3]"
+                className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-red-200 bg-white px-3 text-sm font-medium text-red-700 transition hover:border-red-300 hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <Trash2 size={15} aria-hidden="true" />
                 {deletingProjectId === proyectoUsuario.proyecto.id ? "Eliminando..." : "Eliminar"}
