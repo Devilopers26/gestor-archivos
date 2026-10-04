@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { useAuth } from "../../context/AuthContext";
+import FooterDash from "../atoms/FooterDash";
 import HaderDash from "../atoms/HaderDash";
 
 export default function SidebarDash() {
@@ -98,6 +99,7 @@ export default function SidebarDash() {
         <div className="flex-1 overflow-y-auto">
           <Outlet />
         </div>
+        <FooterDash />
 
       </main>
 

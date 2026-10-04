@@ -10,7 +10,7 @@ export default function HaderDash({ onMenuClick }: HaderDashProps) {
   return (
     <div className="border-b-2 border-black">
         {/* Header */}
-        <header className="flex h-16 items-center justify-between bg-white px-4 shadow-sm sm:px-8">
+        <header className="flex h-11 md:h-16 items-center justify-between bg-white px-4 shadow-sm sm:px-8">
           <div className="flex min-w-0 items-center gap-3">
             <button
               type="button"
