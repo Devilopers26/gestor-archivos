@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   Folder,
   File,
   LogOut,
   Settings,
-  LayoutDashboard
+  LayoutDashboard,
 } from "lucide-react";
 
 import { useAuth } from "../../context/AuthContext";
@@ -14,6 +15,7 @@ export default function SidebarDash() {
 
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   async function handleLogout() {
     await logout();
@@ -34,13 +36,21 @@ export default function SidebarDash() {
     ]
 
   return (
-    <div className="h-screen bg-[#0A0A0A] flex overflow-hidden">
+      <div className="flex h-dvh overflow-hidden bg-[#0A0A0A]">
 
       {/* Sidebar */}
-    <aside className="w-64 h-screen shrink-0 bg-linear-to-b from-black to-[#7B2CD9]/30 text-brand-white flex flex-col">
+    {mobileNavOpen && (
+      <button
+        type="button"
+        aria-label="Cerrar menú"
+        onClick={() => setMobileNavOpen(false)}
+        className="fixed inset-0 z-30 bg-black/60 md:hidden"
+      />
+    )}
+    <aside className={`fixed inset-y-0 left-0 z-40 flex h-dvh w-64 shrink-0 flex-col bg-linear-to-b from-black to-[#7B2CD9]/30 text-brand-white transition-transform duration-200 md:static md:z-auto md:translate-x-0 ${mobileNavOpen ? "translate-x-0" : "-translate-x-full"}`}>
 
         <div className="p-6">
-          <img src="/DevLogoda.png" alt="logo" />
+          <img src="/DevLogoda.png" alt="logo" className="mx-auto h-auto w-full max-w-40" />
         </div>
 
         <nav className="flex-1 px-4 space-y-2 mt-4">
@@ -50,6 +60,7 @@ export default function SidebarDash() {
               to={navlink.to}
               end={navlink.to === "/"}
               className={navClass}
+              onClick={() => setMobileNavOpen(false)}
             >
               {navlink.icon}
               <span className="font-medium">{navlink.name}</span>
@@ -62,6 +73,7 @@ export default function SidebarDash() {
           <NavLink
             to="/settings"
             className={navClass}
+            onClick={() => setMobileNavOpen(false)}
           >
             <Settings size={20} />
             <span className="font-medium">Configuración</span>
@@ -79,9 +91,9 @@ export default function SidebarDash() {
       </aside>
 
       {/* Main */}
-      <main className="flex-1 h-screen flex flex-col overflow-hidden bg-white ">
+      <main className="flex h-dvh min-w-0 flex-1 flex-col overflow-hidden bg-white">
 
-        <HaderDash />
+        <HaderDash onMenuClick={() => setMobileNavOpen(true)} />
         <div className=" border border-amber-50"></div>
         <div className="flex-1 overflow-y-auto">
           <Outlet />

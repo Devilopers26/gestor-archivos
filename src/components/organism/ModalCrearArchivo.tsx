@@ -124,7 +124,7 @@ export default function ModalCrearArchivo({
         role="dialog"
         aria-modal="true"
         aria-labelledby="create-file-title"
-        className="relative z-10 w-full max-w-md rounded-2xl border-2 border-gray-200 bg-black p-6 shadow-2xl"
+        className="relative z-10 max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-2xl border-2 border-gray-200 bg-black p-4 shadow-2xl sm:p-6"
       >
         <button
           type="button"
@@ -155,7 +155,7 @@ export default function ModalCrearArchivo({
           </label>
           <fieldset className="space-y-3">
             <legend className="text-sm font-medium text-white">Origen del archivo</legend>
-            <div className="grid grid-cols-2 gap-2 rounded-xl bg-gray-100 p-1">
+            <div className="grid grid-cols-1 gap-2 rounded-xl bg-gray-100 p-1 sm:grid-cols-2">
               <button
                 type="button"
                 aria-pressed={sourceMode === "cloudinary"}
@@ -215,7 +215,7 @@ export default function ModalCrearArchivo({
               </label>
             )}
           </fieldset>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <label className="block space-y-1.5 text-sm font-medium text-white">
               Tipo
               <input
@@ -239,18 +239,18 @@ export default function ModalCrearArchivo({
             </label>
           </div>
           {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-          <div className="flex justify-end gap-2 pt-1">
+          <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700 sm:w-auto"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="rounded-lg bg-[#ff2fa3] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#d63388] disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-lg bg-[#ff2fa3] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#d63388] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {saving ? "Guardando..." : "Guardar archivo"}
             </button>
