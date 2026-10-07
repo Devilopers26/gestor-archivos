@@ -48,13 +48,13 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-details-title"
-          className={`relative z-10 max-h-[90vh] w-full overflow-y-auto rounded-2xl border-3 border-white bg-[#0a0a0a] p-6 shadow-2xl transition-[max-width] duration-300 sm:p-8 ${showCreateForm || archivoToEdit ? "max-w-3xl" : "max-w-xl"}`}
+          className={`relative z-10 max-h-[90vh] w-full overflow-y-auto rounded-2xl border-3 border-white bg-white p-6 text-gray-900 shadow-2xl transition-[max-width] duration-300 sm:p-8 ${showCreateForm || archivoToEdit ? "max-w-3xl" : "max-w-xl"}`}
         >
           <button
             type="button"
             onClick={onClose}
             aria-label="Cerrar"
-            className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-lg text-white transition-colors hover:bg-gray-100 hover:text-gray-900"
+            className="absolute right-5 top-5 flex size-9 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900"
           >
             <X size={19} />
           </button>
@@ -63,39 +63,39 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
             <div className="mb-4 flex size-11 items-center justify-center rounded-xl border border-pink-400/30 bg-pink-400/10 text-pink-300">
               <Folder size={21} aria-hidden="true" />
             </div>
-            <h2 id="project-details-title" className="text-2xl font-semibold text-white">
+            <h2 id="project-details-title" className="text-2xl font-semibold text-gray-900">
               {project.proyecto.name}
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-200">
+            <p className="mt-1 text-sm leading-6 text-gray-600">
               {project.proyecto.descripcion || "Sin descripción"}
             </p>
           </header>
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-white bg-white/4 p-3">
-              <p className="text-xs text-gray-400">Estado</p>
-              <p className="mt-1 flex items-center gap-2 text-sm font-medium capitalize text-white">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+              <p className="text-xs text-gray-500">Estado</p>
+              <p className="mt-1 flex items-center gap-2 text-sm font-medium capitalize text-gray-900">
                 <CircleDot size={15} className="text-pink-400" aria-hidden="true" />
                 {project.proyecto.status.replaceAll("_", " ")}
               </p>
             </div>
-            <div className="rounded-xl border border-white bg-white/4 p-3">
-              <p className="text-xs text-gray-400">Tu rol</p>
-              <p className="mt-1 flex items-center gap-2 text-sm font-medium capitalize text-white">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+              <p className="text-xs text-gray-500">Tu rol</p>
+              <p className="mt-1 flex items-center gap-2 text-sm font-medium capitalize text-gray-900">
                 <Shield size={15} className="text-pink-400" aria-hidden="true" />
                 {project.rol_en_proyecto}
               </p>
             </div>
-            <div className="rounded-xl border border-white bg-white/4 p-3">
-              <p className="text-xs text-gray-400">Archivos</p>
-              <p className="mt-1 flex items-center gap-2 text-sm font-medium text-white">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+              <p className="text-xs text-gray-500">Archivos</p>
+              <p className="mt-1 flex items-center gap-2 text-sm font-medium text-gray-900">
                 <FileText size={15} className="text-pink-400" aria-hidden="true" />
                 {archivos.length}
               </p>
             </div>
           </div>
 
-          <div className="mt-6 border-t border-white pt-5">
+          <div className="mt-6 border-t border-gray-200 pt-5">
             {user?.role === "admin" && project.rol_en_proyecto === "admin_proyect" && (
               <button
                 type="button"
@@ -110,7 +110,7 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
             )}
 
             <div className="mt-5 space-y-3">
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-base font-semibold text-gray-900">
                 Archivos del proyecto
               </h3>
               {archivos.length > 0 ? (
@@ -118,21 +118,21 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
                   {archivos.map((archivo) => (
                     <div
                       key={archivo.id}
-                      className="flex items-center gap-2 rounded-xl border border-white bg-white/4 p-2"
+                      className="flex items-center gap-2 rounded-xl border border-gray-200 bg-gray-50 p-2"
                     >
                       <a
                          href={archivo.url_archivo}
                          target="_blank"
                          rel="noreferrer"
-                         className="flex min-w-0 flex-1 items-center gap-3 rounded-lg px-2 py-2 text-gray-200 transition-colors hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-pink-400"
+                         className="flex min-w-0 flex-1 items-center gap-3 rounded-lg px-2 py-2 text-gray-700 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-pink-400"
                        >
                          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-pink-400/20 bg-pink-400/10 text-pink-300">
                            <FileText size={18} aria-hidden="true" />
                          </span>
-                         <span className="min-w-0 flex-1 truncate text-sm font-medium text-white">
+                         <span className="min-w-0 flex-1 truncate text-sm font-medium text-gray-900">
                            {archivo.name}
                          </span>
-                         <ArrowUpRight size={17} className="shrink-0 text-gray-400" aria-hidden="true" />
+                         <ArrowUpRight size={17} className="shrink-0 text-gray-500" aria-hidden="true" />
                        </a>
 
                       <div className="flex shrink-0 items-center gap-1.5">
@@ -143,7 +143,7 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
                           rel="noreferrer"
                           aria-label={`Descargar ${archivo.name}`}
                           title="Descargar"
-                          className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-emerald-400/40 hover:bg-emerald-400/10 hover:text-emerald-300 focus-visible:outline-2 focus-visible:outline-emerald-400"
+                          className="flex size-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition-colors hover:border-emerald-400/40 hover:bg-emerald-50 hover:text-emerald-700 focus-visible:outline-2 focus-visible:outline-emerald-400"
                         >
                           <Download size={16} aria-hidden="true" />
                         </a>
@@ -154,7 +154,7 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
                               aria-label={`Editar ${archivo.name}`}
                               title="Editar"
                               onClick={() => setArchivoToEdit(archivo)}
-                              className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-sky-400/40 hover:bg-sky-400/10 hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-sky-400"
+                              className="flex size-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition-colors hover:border-sky-400/40 hover:bg-sky-50 hover:text-sky-700 focus-visible:outline-2 focus-visible:outline-sky-400"
                             >
                               <Pencil size={16} aria-hidden="true" />
                             </button>
@@ -163,7 +163,7 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
                               aria-label={`Eliminar ${archivo.name}`}
                               title="Eliminar"
                               onClick={() => setArchivoToDelete(archivo)}
-                              className="flex size-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-red-400/40 hover:bg-red-400/10 hover:text-red-300 focus-visible:outline-2 focus-visible:outline-red-400"
+                              className="flex size-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition-colors hover:border-red-400/40 hover:bg-red-50 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-red-400"
                             >
                               <Trash2 size={16} aria-hidden="true" />
                             </button>
@@ -174,18 +174,18 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
                   ))}
                 </div>
               ) : (
-                <p className="rounded-xl border border-dashed border-white/15 px-4 py-5 text-sm text-gray-400">
+                <p className="rounded-xl border border-dashed border-gray-300 px-4 py-5 text-sm text-gray-500">
                   Este proyecto aún no tiene archivos.
                 </p>
               )}
             </div>
           </div>
 
-          <div className="mt-6 flex justify-end border-t border-white pt-4">
+          <div className="mt-6 flex justify-end border-t border-gray-200 pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-white px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-500"
             >
               Cerrar
             </button>
@@ -213,20 +213,20 @@ export default function ModalProyects({ project, onClose }: ModalProyectsProps) 
       {archivoToDelete && (
         <div className="fixed inset-0 z-70 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setArchivoToDelete(null)} />
-          <section className="relative z-71 w-full max-w-md rounded-2xl border border-white/15 bg-[#111] p-6 shadow-2xl">
+          <section className="relative z-71 w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl">
             <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-red-500/30 bg-red-500/10 text-red-400">
               <Trash2 size={22} />
             </div>
-            <h2 className="text-xl font-semibold text-white">¿Eliminar archivo?</h2>
-            <p className="mt-2 text-sm leading-6 text-white/60">
-              El archivo <span className="font-medium text-white">{archivoToDelete.name}</span> será eliminado del proyecto. Esta acción no se puede deshacer.
+            <h2 className="text-xl font-semibold text-gray-900">¿Eliminar archivo?</h2>
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              El archivo <span className="font-medium text-gray-900">{archivoToDelete.name}</span> será eliminado del proyecto. Esta acción no se puede deshacer.
             </p>
             <div className="mt-8 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setArchivoToDelete(null)}
                 disabled={isDeleting}
-                className="px-5 py-2.5 rounded-xl border border-white/20 text-sm font-medium text-white hover:bg-white/10 transition-colors disabled:opacity-50"
+                className="rounded-xl border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:opacity-50"
               >
                 Cancelar
               </button>

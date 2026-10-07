@@ -54,6 +54,30 @@ export interface AvailableProjectUser {
   correo: string;
 }
 
+export interface Servicio {
+  id: number;
+  nombre: string;
+  tipo: string;
+  fecha_contratacion: string | null;
+  fecha_expiracion: string;
+  costo_renovacion: number | string | null;
+  estado: string | null;
+  fk_id_user: number;
+  usuario_nombre?: string;
+  usuario_username?: string;
+  usuario_correo?: string;
+}
+
+export interface CreateServicioPayload {
+  nombre: string;
+  tipo: string;
+  fecha_contratacion?: string;
+  fecha_expiracion: string;
+  costo_renovacion?: number;
+  estado: "activo" | "desactivo" | "cancelado";
+  fk_id_user: number;
+}
+
 export interface ProyectoInterface {
   id: number;
   fk_id_user:number;
@@ -86,4 +110,3 @@ export interface CreateArchivoPayload {
   size_kb?: number;
   fk_id_proyecto: number;
 }
-

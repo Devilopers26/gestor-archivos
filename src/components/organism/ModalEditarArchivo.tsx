@@ -126,7 +126,7 @@ export default function ModalEditarArchivo({
         role="dialog"
         aria-modal="true"
         aria-labelledby="edit-file-title"
-        className="relative z-10 max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-2xl border-2 border-gray-200 bg-black p-4 shadow-2xl sm:p-6"
+        className="relative z-10 max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-2xl border-2 border-gray-200 bg-white p-4 text-gray-900 shadow-2xl sm:p-6"
       >
         <button
           type="button"
@@ -136,15 +136,15 @@ export default function ModalEditarArchivo({
         >
           <X size={19} />
         </button>
-        <h2 id="edit-file-title" className="pr-10 text-xl font-semibold text-white">
+        <h2 id="edit-file-title" className="pr-10 text-xl font-semibold text-gray-900">
           Editar archivo
         </h2>
-        <p className="mt-1 text-sm text-gray-200">
+        <p className="mt-1 text-sm text-gray-600">
           Actualiza los datos del archivo.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-          <label className="block space-y-1.5 text-sm font-medium text-white">
+          <label className="block space-y-1.5 text-sm font-medium text-gray-900">
             Nombre <span className="text-red-500">*</span>
             <input
               required
@@ -156,7 +156,7 @@ export default function ModalEditarArchivo({
             />
           </label>
           <fieldset className="space-y-3">
-            <legend className="text-sm font-medium text-white">Origen del archivo</legend>
+            <legend className="text-sm font-medium text-gray-900">Origen del archivo</legend>
             <div className="grid grid-cols-1 gap-2 rounded-xl bg-gray-100 p-1 sm:grid-cols-2">
               <button
                 type="button"
@@ -200,7 +200,7 @@ export default function ModalEditarArchivo({
                 />
               </label>
             ) : (
-              <label className="block space-y-1.5 text-sm font-medium text-white">
+              <label className="block space-y-1.5 text-sm font-medium text-gray-900">
                 URL completa del archivo <span className="text-red-500">*</span>
                 <input
                   required
@@ -217,7 +217,7 @@ export default function ModalEditarArchivo({
             )}
           </fieldset>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <label className="block space-y-1.5 text-sm font-medium text-white">
+            <label className="block space-y-1.5 text-sm font-medium text-gray-900">
               Tipo
               <input
                 value={tipoArchivo}
@@ -226,7 +226,7 @@ export default function ModalEditarArchivo({
                 placeholder="PDF, imagen..."
               />
             </label>
-            <label className="block space-y-1.5 text-sm font-medium text-white">
+            <label className="block space-y-1.5 text-sm font-medium text-gray-900">
               Tamaño (KB)
               <input
                 type="number"
@@ -244,7 +244,7 @@ export default function ModalEditarArchivo({
             <button
               type="button"
               onClick={onClose}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-700 sm:w-auto"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 sm:w-auto"
             >
               Cancelar
             </button>

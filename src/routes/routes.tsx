@@ -5,9 +5,9 @@ import SidebarDash from "../components/pages/SidebarDash";
 import Proyects from "../components/pages/Proyects";
 import Access from "../components/pages/Access";
 import Configuracion from "../components/pages/Configuracion";
+import Servicios from "../components/pages/Servicios";
 import ProtectRoute from "../hooks/ProtectRoute";
 
-// 1. Cambiamos el nombre a "AppRoutes" (los componentes siempre van en mayúscula)
 export default function AppRoutes() {
   return (
     <Routes>
@@ -19,6 +19,7 @@ export default function AppRoutes() {
           <Route index element={<Home/>}/>
           <Route path="proyects" element={<Proyects/>}/>
           <Route path="access" element={<Access/>}/>
+          <Route path="services" element={<Servicios/>}/>
           <Route path="settings" element={<Configuracion/>}/>
         </Route>
 

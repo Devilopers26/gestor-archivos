@@ -4,8 +4,10 @@ import type {
   AdministrableProject,
   CreateProyectoPayload,
   CreateArchivoPayload,
+  CreateServicioPayload,
   ProyectoAccessRole,
   ProyectoMember,
+  Servicio,
 } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -127,6 +129,36 @@ export async function eliminarArchivo(token: string, idArchivo: number) {
 
 export async function actualizarArchivo(token: string, idArchivo: number, data: Partial<CreateArchivoPayload>) {
   const res = await api.put(`/archivos/${idArchivo}`, data, authHeaders(token));
+  return res.data;
+}
+
+// ===================== SERVICIOS =====================
+
+export async function getServicios(token: string): Promise<Servicio[]> {
+  const res = await api.get(`/servicios`, authHeaders(token));
+  return res.data.servicios;
+}
+
+export async function buscarUsuariosServicios(token: string, query = ""): Promise<AvailableProjectUser[]> {
+  const res = await api.get(`/auth/users`, {
+    ...authHeaders(token),
+    params: { q: query },
+  });
+  return res.data.users;
+}
+
+export async function crearServicio(token: string, data: CreateServicioPayload) {
+  const res = await api.post(`/servicios`, data, authHeaders(token));
+  return res.data;
+}
+
+export async function actualizarServicio(token: string, id: number, data: CreateServicioPayload) {
+  const res = await api.put(`/servicios/${id}`, data, authHeaders(token));
+  return res.data;
+}
+
+export async function eliminarServicio(token: string, id: number) {
+  const res = await api.delete(`/servicios/${id}`, authHeaders(token));
   return res.data;
 }
 

@@ -6,6 +6,7 @@ import {
   LogOut,
   Settings,
   LayoutDashboard,
+  BriefcaseBusiness,
 } from "lucide-react";
 
 import { useAuth } from "../../context/AuthContext";
@@ -33,7 +34,8 @@ export default function SidebarDash() {
     const arrayNavLink = [
       {name: "Dashboard", to: "/", icon: <LayoutDashboard size={20} />},
       {name: "Mis Proyectos", to: "/proyects", icon: <Folder size={20} />},
-      {name: "Accesos", to: "/access", icon: <File size={20} />}
+      {name: "Accesos", to: "/access", icon: <File size={20} />},
+      {name: "Servicios", to: "/services", icon: <BriefcaseBusiness size={20} />}
     ]
 
   return (
